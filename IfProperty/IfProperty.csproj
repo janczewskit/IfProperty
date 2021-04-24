@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+	<PackageId>IfProperty</PackageId>
+	<Version>1.0.0</Version>
+	<Authors>janczewskit</Authors>
+	<Description>.NET library for building attributes based validation rules.</Description>
+	<PackageTags>InputValidation;Validation;Data;Required;Attributes</PackageTags>
+	<RepositoryUrl>https://github.com/janczewskit/IfProperty</RepositoryUrl>
+	<PackageProjectUrl>https://github.com/janczewskit/IfProperty</PackageProjectUrl>
+	<Copyright>Copyright (c) 2021 janczewskit</Copyright>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<PackageLicenseExpression></PackageLicenseExpression>
+	<PackageLicenseFile>LICENSE</PackageLicenseFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
