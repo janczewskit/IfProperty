@@ -32,39 +32,40 @@ Equality
 ```csharp
 using static IfProperty.IsOperatorEnumeration;
 
-private class Model
+class SetStatusCommand
 {
-    // Value of property Value2 equals constant value "test" verification
-    [Is(EqualTo, Value = "test")]
-    public string Value2 { get; set; }
+    // Value of property equals constant value true verification
+    [Is(EqualTo, Value = true)]
+    public string IsSuccess { get; set; }
 }
         
-private class Model
+class SetNewPasswordCommand
 {
-    public string Value1 { get; set; }
+    [Required]
+    public string Password { get; set; }
     
-    // Value of property Value2 equal to value of property Value1 verification 
-    [Is(EqualTo, Property = nameof(Value1), PassOnNull = true)]
-    public string Value2 { get; set; }
+    // Value of property RepeatedPassword equal to value of property Password verification 
+    [Is(EqualTo, Property = nameof(Password)]
+    public string RepeatedPassword { get; set; }
 }
 
-private class Model
+class SetOrClearPasswordCommand
 {
-    public string Value1 { get; set; }
+    public string Password { get; set; }
     
-    // Value of property Value2 equal to value of property Value1 verification
+    // Value of property RepeatedPassword equal to value of property Password verification
     // PassOnNull - if both options are null -> true, if one is not null -> false
-    [Is(EqualTo, Property = nameof(Value1), PassOnNull = true)]
-    public string Value2 { get; set; }
+    [Is(EqualTo, Property = nameof(Password), PassOnNull = true)]
+    public string RepeatedPassword { get; set; }
 }
 
-private class Model
+class ChangePasswordCommand
 {
-    public string Value1 { get; set; }
+    public string OldPassword { get; set; }
     
-    // Value of property Value2 not equal to value of property Value1 verification
-    [Is(NotEqualTo, Property = nameof(Value1), PassOnNull = true)]
-    public string Value2 { get; set; }
+    // Value of property NewPassword not equal to value of property OldPassword verification
+    [Is(NotEqualTo, Property = nameof(OldPassword), PassOnNull = true)]
+    public string NewPassword { get; set; }
 }
 ```
 
@@ -72,27 +73,28 @@ GreaterThan/LessThan
 ```csharp
 using static IfProperty.IsOperatorEnumeration;
 
-private class Model
+class AddBuildingCommand
 {
+
     // Value of property is greater than 1
     [Is(GreaterThan, Value = 1)]
-    public int? Value1 { get; set; }
+    public int? UsableArea { get; set; }
     
     // Value of property is greater than or equal to 1
-    [Is(GreaterThan, Value = 1)]
-    public int? Value2 { get; set; }
+    [Is(GreaterThanOrEqual, Value = 1)]
+    public int? BuildingArea { get; set; }
     
-    //Value of property is less than 1
-    [Is(LessThan, Value = 1)]
-    public int? Value3 { get; set; }
+    //Value of property is less than 200
+    [Is(LessThan, Value = 200)]
+    public int? BuiltUpArea { get; set; }
     
-    // Value of property is less than or equal to 1
-    [Is(LessThanOrEqualTo, Value = 1)]
-    public int? Value4 { get; set; }
+    // Value of property is less than or equal to 4000
+    [Is(LessThanOrEqualTo, Value = 4000)]
+    public int? BuildingPlot { get; set; }
     
-    // Value of property is less than 1 or null
-    [Is(LessThan, Value = 1, PassOnNull = true)]
-    public int? Value5 { get; set; }
+    // Value of property is less than int.MaxValue or null
+    [Is(LessThan, Value = int.MaxValue, PassOnNull = true)]
+    public int? NumberOfFloors { get; set; }
 }
 ```
 
@@ -100,17 +102,17 @@ In/Not in
 ```csharp
 using static IfProperty.IsOperatorEnumeration;
 
-private class Model
+class GroupAffiliationCommand
 {
-    public string[] Value1 { get; set; }
+    public string[] AvailableTypes { get; set; }
 
-    // Value of property Value2 is in Value1 array values or both values are null
-    [Is(In, Property = nameof(Value1), PassOnNull = true)]
-    public string Value2 { get; set; }
+    // Value of property CurrentType is in AvailableTypes array values or both values are null
+    [Is(In, Property = nameof(AvailableTypes), PassOnNull = true)]
+    public string CurrentType { get; set; }
     
-    // Value of property Value is in {"testStaticValue", "testStaticValue2" }
-    [Is(In, Value = new [] {"testStaticValue", "testStaticValue2" })]
-    public string Value { get; set; }
+    // Value of property AffiliationType is in {"full", "temporal" }
+    [Is(In, Value = new [] {"full", "temporal"})]
+    public string AffiliationType  { get; set; }
 }
 ```
 
@@ -118,15 +120,15 @@ Regex
 ```csharp
 using static IfProperty.IsOperatorEnumeration;
 
-private class Model
+class AddUserCommand
 {
-    // Value of property Value is match email regex. If value is invalid validator return custom message.
+    // Value of property Email is match email regex. If value is invalid validator return custom message.
     [Is(RegExMatch, Value = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", CustomMessage = "Format of the email address isn't correct")]
-    public string Value { get; set; }
+    public string Email { get; set; }
     
-    // Value of property Value2 isn't match email regex
-    [Is(NotRegExMatch, Value = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$")]
-    public string Value2 { get; set; }
+    // Value of property Domain isn't match google.com domain
+    [Is(NotRegExMatch, Value = @"(\w)+\.google\.com")]
+    public string Domain { get; set; }
 }
 ```
 
